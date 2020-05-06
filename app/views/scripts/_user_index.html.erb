@@ -1,0 +1,8 @@
+<% current_user.scripts.each do |script| %>
+        <tr>
+          <td><%= script.details %></td>
+          <td><%= script.expiration %></td>
+          <td><%= script.doctor %></td>
+          <td><%= link_to 'Show', script %></td>
+        </tr>
+      <% end %>
