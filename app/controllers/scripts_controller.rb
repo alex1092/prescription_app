@@ -11,6 +11,7 @@ class ScriptsController < ApplicationController
   # GET /scripts/1
   # GET /scripts/1.json
   def show
+
   end
 
   # GET /scripts/new
