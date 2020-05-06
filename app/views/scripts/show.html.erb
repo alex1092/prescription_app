@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @script.user_id %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @script.details %>
+</p>
+
+<p>
+  <strong>Expiration:</strong>
+  <%= @script.expiration %>
+</p>
+
+<p>
+  <strong>Doctor:</strong>
+  <%= @script.doctor %>
+</p>
+
+<%= link_to 'Edit', edit_script_path(@script) %> |
+<%= link_to 'Back', scripts_path %>
