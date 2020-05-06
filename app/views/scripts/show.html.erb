@@ -20,5 +20,7 @@
   <%= @script.doctor %>
 </p>
 
+<% if current_user.has_role? :admin %>
 <%= link_to 'Edit', edit_script_path(@script) %> |
+<% end %>
 <%= link_to 'Back', scripts_path %>

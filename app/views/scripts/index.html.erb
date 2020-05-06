@@ -20,9 +20,12 @@
         <td><%= script.details %></td>
         <td><%= script.expiration %></td>
         <td><%= script.doctor %></td>
+
         <td><%= link_to 'Show', script %></td>
+        <% if current_user.has_role? :admin %>
         <td><%= link_to 'Edit', edit_script_path(script) %></td>
         <td><%= link_to 'Destroy', script, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +33,6 @@
 
 <br>
 
+<% if current_user.has_role? :admin %>
 <%= link_to 'New Script', new_script_path %>
+<% end %>
