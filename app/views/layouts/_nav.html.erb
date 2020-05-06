@@ -24,7 +24,7 @@
       </form>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <% if user_signed_in? || doctor_signed_in? %>
+            <% if user_signed_in? %>
                 <%=  link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'nav-link' %>
               <%else%>
                 <li class="nav-item dropdown">
@@ -32,8 +32,7 @@
             Sign In
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to "User Sign In", new_user_session_path, class: 'dropdown-item' %>
-            <%= link_to "Dr Sign In", new_doctor_session_path, class: 'dropdown-item'%>
+            <%= link_to "Sign In", new_user_session_path, class: 'dropdown-item' %>
           </div>
         </li>
         <% end %>
