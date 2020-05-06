@@ -72,6 +72,7 @@ class ScriptsController < ApplicationController
       end
     else
       redirect_to scripts_path
+
       flash[:alert] = "You need to be an admin to delete scripts"
     end
   end

@@ -5,7 +5,10 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
+      <% if current_user.has_role? :admin %>
+        <th>Patient</th>
+      <% end %>
+      
       <th>Details</th>
       <th>Expiration</th>
       <th>Doctor</th>
@@ -13,14 +16,16 @@
     </tr>
   </thead>
 
+
   <tbody>
+
+  <% if current_user.has_role? :admin %>
     <% @scripts.each do |script| %>
       <tr>
         <td><%= script.user_id %></td>
         <td><%= script.details %></td>
         <td><%= script.expiration %></td>
         <td><%= script.doctor %></td>
-
         <td><%= link_to 'Show', script %></td>
         <% if current_user.has_role? :admin %>
         <td><%= link_to 'Edit', edit_script_path(script) %></td>
@@ -28,6 +33,16 @@
         <%end%>
       </tr>
     <% end %>
+    <%else%>
+     <% current_user.scripts.each do |script| %>
+        <tr>
+          <td><%= script.details %></td>
+          <td><%= script.expiration %></td>
+          <td><%= script.doctor %></td>
+          <td><%= link_to 'Show', script %></td>
+        </tr>
+      <% end %>
+    <% end%>
   </tbody>
 </table>
 
