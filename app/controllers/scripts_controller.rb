@@ -1,6 +1,7 @@
 class ScriptsController < ApplicationController
   before_action :set_script, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+
   # GET /scripts
   # GET /scripts.json
   def index
@@ -10,6 +11,7 @@ class ScriptsController < ApplicationController
   # GET /scripts/1
   # GET /scripts/1.json
   def show
+
   end
 
   # GET /scripts/new
@@ -24,8 +26,8 @@ class ScriptsController < ApplicationController
   # POST /scripts
   # POST /scripts.json
   def create
+    if user_has_permision
     @script = Script.new(script_params)
-
     respond_to do |format|
       if @script.save
         format.html { redirect_to @script, notice: 'Script was successfully created.' }
@@ -35,29 +37,44 @@ class ScriptsController < ApplicationController
         format.json { render json: @script.errors, status: :unprocessable_entity }
       end
     end
+    else
+      redirect_to scripts_path
+      flash[:alert] = "You need to be an admin to create a script"
+    end
   end
 
   # PATCH/PUT /scripts/1
   # PATCH/PUT /scripts/1.json
   def update
-    respond_to do |format|
-      if @script.update(script_params)
-        format.html { redirect_to @script, notice: 'Script was successfully updated.' }
-        format.json { render :show, status: :ok, location: @script }
-      else
-        format.html { render :edit }
-        format.json { render json: @script.errors, status: :unprocessable_entity }
+    if user_has_permision
+      respond_to do |format|
+        if @script.update(script_params)
+          format.html { redirect_to @script, notice: 'Script was successfully updated.' }
+          format.json { render :show, status: :ok, location: @script }
+        else
+          format.html { render :edit }
+          format.json { render json: @script.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to scripts_path
+     flash[:alert] = "You need to be an admin to edit a script"
     end
   end
 
   # DELETE /scripts/1
   # DELETE /scripts/1.json
   def destroy
-    @script.destroy
-    respond_to do |format|
-      format.html { redirect_to scripts_url, notice: 'Script was successfully destroyed.' }
-      format.json { head :no_content }
+    if user_has_permision
+      @script.destroy
+      respond_to do |format|
+        format.html { redirect_to scripts_url, notice: 'Script was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to scripts_path
+
+      flash[:alert] = "You need to be an admin to delete scripts"
     end
   end
 
@@ -71,4 +88,9 @@ class ScriptsController < ApplicationController
     def script_params
       params.require(:script).permit(:user_id, :details, :expiration, :doctor)
     end
+
+    def user_has_permision
+      current_user.has_role? :admin
+    end
+  
 end
