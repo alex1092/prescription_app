@@ -1,8 +1,10 @@
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
    <div class="container">
-    <a class="navbar-brand" href="#"><%= fa_icon "medkit 3x" %></a>
-          
 
+      <%= link_to root_path do %>
+        <%= fa_icon "medkit 3x", class: 'navbar-brand' %>
+      <%end%>
+          
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -18,25 +20,24 @@
           <% end %>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
         </li>
       </ul>
-      <span class="mr-3">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <% if user_signed_in? %>
-                <%=  link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'nav-link' %>
-              <%else%>
-              <%= link_to "Sign In", new_user_session_path, class: 'dropdown-item' %>
-        </li>
-        <% end %>
-        </li>
-   
-        </ul>
+        <span class="mr-3">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <% if user_signed_in? %>
+                  <%=  link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'nav-link' %>
+                <%else%>
+                <%= link_to "Sign In", new_user_session_path, class: 'dropdown-item' %>
+            </li>
+              <% end %>
+            </li>
+          </ul>
         </span>
-    </div>
+      </div>
     </div>
   </nav>

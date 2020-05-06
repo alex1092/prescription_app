@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Scripts</h1>
+<% if current_user.has_role? :admin %>
+    <h1>Scripts</h1>
+  <%else%>
+    <h1>Your Scripts</h1>
+  <%end%>
 
 <table>
   <thead>
@@ -8,7 +12,6 @@
       <% if current_user.has_role? :admin %>
         <th>Patient</th>
       <% end %>
-      
       <th>Details</th>
       <th>Expiration</th>
       <th>Doctor</th>
@@ -16,32 +19,11 @@
     </tr>
   </thead>
 
-
   <tbody>
-
-  <% if current_user.has_role? :admin %>
-    <% @scripts.each do |script| %>
-      <tr>
-        <td><%= User.find(script.user_id).name %></td>
-        <td><%= script.details %></td>
-        <td><%= script.expiration %></td>
-        <td><%= script.doctor %></td>
-        <td><%= link_to 'Show', script %></td>
-        <% if current_user.has_role? :admin %>
-        <td><%= link_to 'Edit', edit_script_path(script) %></td>
-        <td><%= link_to 'Destroy', script, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>
-      </tr>
-    <% end %>
+    <% if current_user.has_role? :admin %>
+      <%= render '/scripts/dr_index'%>
     <%else%>
-     <% current_user.scripts.each do |script| %>
-        <tr>
-          <td><%= script.details %></td>
-          <td><%= script.expiration %></td>
-          <td><%= script.doctor %></td>
-          <td><%= link_to 'Show', script %></td>
-        </tr>
-      <% end %>
+      <%= render '/scripts/user_index'%>
     <% end%>
   </tbody>
 </table>
@@ -51,3 +33,5 @@
 <% if current_user.has_role? :admin %>
 <%= link_to 'New Script', new_script_path %>
 <% end %>
+
+
