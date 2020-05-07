@@ -7,5 +7,8 @@ class RegistrationsController < Devise::RegistrationsController
         resource.add_role(:admin)
       end
     end
+
+
+
   
 end
