@@ -29,6 +29,7 @@ class ScriptsController < ApplicationController
     if user_has_permision
     @script = Script.new(script_params)
     @script.doctor = current_user.name
+    @script.picture.attach(params[:script][:picture])
     respond_to do |format|
       if @script.save
         format.html { redirect_to @script, notice: 'Script was successfully created.' }
@@ -87,7 +88,7 @@ class ScriptsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def script_params
-      params.require(:script).permit(:user_id, :details, :expiration, :doctor)
+      params.require(:script).permit(:user_id, :details, :expiration, :doctor, :picture)
     end
 
     def user_has_permision
