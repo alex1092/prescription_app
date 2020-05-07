@@ -26,7 +26,6 @@ class ScriptsController < ApplicationController
   # POST /scripts
   # POST /scripts.json
   def create
-    
     if user_has_permision
     @script = Script.new(script_params)
     @script.doctor = current_user.name
