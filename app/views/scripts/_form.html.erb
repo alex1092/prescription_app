@@ -2,7 +2,6 @@
   <% if script.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(script.errors.count, "error") %> prohibited this script from being saved:</h2>
-
       <ul>
         <% script.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -10,24 +9,18 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= form.text_field :user_id, class: 'form-control' %>
   </div>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :details %>
-    <%= form.text_area :details %>
+    <%= form.text_area :details, class: 'form-control' %>
   </div>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :expiration %>
-    <%= form.date_select :expiration %>
-    
+    <br>
+    <%= form.date_select :expiration, class: 'form-control' %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= form.submit %>
 <% end %>
