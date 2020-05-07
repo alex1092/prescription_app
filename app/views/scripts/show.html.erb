@@ -1,31 +1,29 @@
+ 
 <p id="notice"><%= notice %></p>
-
-<p>
-
-  <%=image_tag @script.picture%>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @script.user_id %>
-</p>
-
-<p>
-  <strong>Details:</strong>
-  <%= @script.details %>
-</p>
-
-<p>
-  <strong>Expiration:</strong>
-  <%= @script.expiration %>
-</p>
-
-<p>
-  <strong>Doctor:</strong>
-  <%= @script.doctor %>
-</p>
-
-<% if current_user.has_role? :admin %>
-<%= link_to 'Edit', edit_script_path(@script) %> |
-<% end %>
-<%= link_to 'Back', scripts_path %>
+<div class="row">
+  <div class="col">
+    <p>
+      <strong>User:</strong>
+      <%= @script.user_id %>
+    </p>
+    <p>
+      <strong>Details:</strong>
+      <%= @script.details %>
+    </p>
+    <p>
+      <strong>Expiration:</strong>
+      <%= @script.expiration %>
+    </p>
+    <p>
+      <strong>Doctor:</strong>
+      <%= @script.doctor %>
+    </p>
+    <% if current_user.has_role? :admin %>
+      <%= link_to 'Edit', edit_script_path(@script) %> |
+    <% end %>
+    <%= link_to 'Back', scripts_path %>
+  </div>
+  <div class="col">
+    <%=image_tag @script.picture, class:'img-thumbnail', width: 150 %>
+  </div>
+</div>
