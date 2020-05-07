@@ -1,14 +1,38 @@
-  <% @scripts.each do |script| %>
-      <tr>
-        <td><%= User.find(script.user_id).name %></td>
-        <td><%= script.details %></td>
-        <td><%= script.expiration %></td>
-        <td><%= script.doctor %></td>
-        <td><%= link_to 'Show', script %></td>
-        <% if current_user.has_role? :admin %>
-        <td><%= link_to 'Edit', edit_script_path(script) %></td>
-        <td><%= link_to 'Destroy', script, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>
-      </tr>
-    <% end %>
- 
+    <% @scripts.each do |script| %>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <% if current_user.has_role? :admin %>
+            <h3>Patient</h3>
+          <% end %>
+          <p><%= User.find(script.user_id).name %></p>
+        </div>
+        <div class="col">
+          <h3>Details</h3>
+          <p><%= script.details %></p>
+        </div>
+        <div class="col">
+          <h3>Expiration</h3>
+          <p><%= script.expiration %></p>
+        </div>
+        <div class="col">
+          <h3>Doctor</h3>
+          <p><%= script.doctor %></p>
+        </div>
+      </div>
+      <div class="row">
+      </div>
+      <%= link_to 'Show', script %>
+      <% if current_user.has_role? :admin %>
+        <%= link_to 'Edit', edit_script_path(script) %>
+        <%= link_to 'Destroy', script, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%end%>
+    </div>
+  </div>
+<%end%>
+<div class="container  mt-5">
+  <% if current_user.has_role? :admin %>
+    <%= link_to 'New Script', new_script_path, class: 'btn btn-primary' %>
+  <% end %>
+</div>
