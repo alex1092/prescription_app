@@ -1,8 +1,21 @@
-<% current_user.scripts.each do |script| %>
-        <tr>
-          <td><%= script.details %></td>
-          <td><%= script.expiration %></td>
-          <td><%= script.doctor %></td>
-          <td><%= link_to 'Show', script %></td>
-        </tr>
-      <% end %>
+<% @scripts.each do |script| %>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <h3>Details</h3>
+          <p><%= script.details %></p>
+        </div>
+        <div class="col">
+          <h3>Expiration</h3>
+          <p><%= script.expiration %></p>
+        </div>
+        <div class="col">
+          <h3>Doctor</h3>
+          <p><%= script.doctor %></p>
+        </div>
+      </div>
+      <%= link_to 'Show', script %>
+    </div>
+  </div>
+<%end%>
