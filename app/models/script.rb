@@ -1,4 +1,6 @@
 class Script < ApplicationRecord
   belongs_to :user
-  has_many_attached :picture
+  has_one_attached :picture
+  
+
 end

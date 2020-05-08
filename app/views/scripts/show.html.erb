@@ -24,6 +24,6 @@
     <%= link_to 'Back', scripts_path %>
   </div>
   <div class="col">
-    <%=image_tag @script.picture, class:'img-thumbnail', width: 150 %>
+    <%=image_tag @script.picture, class:'img-thumbnail', width: 150 if @script.picture.attached? %>
   </div>
 </div>
